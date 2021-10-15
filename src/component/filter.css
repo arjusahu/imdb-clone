@@ -1,0 +1,9 @@
+.filter{
+    display: block !important;
+    width:20%;
+    height:30%;
+    position:fixed;
+    right:0px;
+    top:0px;
+    padding: 10px 10px;
+}
