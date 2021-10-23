@@ -4,9 +4,11 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import EachCard from "./component/card";
 import Filter from "./component/filter";
+import Navbar1 from "./component/navbar"
 
 function App() {
   const [wholeData,setData]=useState([]);
+  const [filterD,setFilterD]=useState(wholeData);
   const[obj,setObj]=useState({
             poster:"",
             title:"",
@@ -38,7 +40,7 @@ function App() {
       )
       .then(res=>res.json())
       .then(data=>{
-        console.log(data);
+        // console.log(data);
         return data.results.map(item=>{
           let arr=wholeData;
           let list={
@@ -49,18 +51,20 @@ function App() {
           }
           arr.push(list);
           setData([...arr]);
-          console.log(wholeData,"jjj");
+          setFilterD([...arr]);
+          // console.log(wholeData,"jjj");
           return list;
         })
       });
   },[])
   return (
   <>
+  <Navbar1 wholeData={wholeData} setFilterD={setFilterD}/>
     <div className="App">
-      {wholeData.map((data)=><EachCard data={data}/>)}
+      {filterD.map((data)=><EachCard data={data}/>)}
       
     </div>
-    <Filter />
+    <Filter setFilterD={setFilterD} wholeData={wholeData}/>
     </>
   );
 }
